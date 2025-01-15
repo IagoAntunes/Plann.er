@@ -7,6 +7,8 @@ import androidx.activity.enableEdgeToEdge
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.iagoaf.plannerjetpack.core.ui.theme.PlannerJetpackTheme
+import com.iagoaf.plannerjetpack.src.home.presentation.HomeScreen
 import com.iagoaf.plannerjetpack.src.registerUser.presentation.RegisterUserScreen
 import com.iagoaf.plannerjetpack.src.splashScreen.presentation.SplashScreen
 
@@ -15,20 +17,24 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            val navController = rememberNavController()
-            NavHost(
-                navController = navController,
-                startDestination = "splash_screen",
-                builder = {
-                    composable("splash_screen") {
-                        SplashScreen(navController)
+            PlannerJetpackTheme {
+                val navController = rememberNavController()
+                NavHost(
+                    navController = navController,
+                    startDestination = "splash_screen",
+                    builder = {
+                        composable("splash_screen") {
+                            SplashScreen(navController)
+                        }
+                        composable("register_user_screen") {
+                            RegisterUserScreen(navController)
+                        }
+                        composable("home_screen") {
+                            HomeScreen()
+                        }
                     }
-                    composable("register_user_screen") {
-                        RegisterUserScreen()
-                    }
-                }
-            )
-
+                )
+            }
         }
     }
 }

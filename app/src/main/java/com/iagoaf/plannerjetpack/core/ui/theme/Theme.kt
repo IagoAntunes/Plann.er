@@ -32,6 +32,7 @@ val interFontFamily = FontFamily(
     Font(R.font.inter_extrabold, FontWeight.ExtraBold),
     Font(R.font.inter_medium, FontWeight.Medium),
     Font(R.font.inter_semibold, FontWeight.SemiBold),
+    Font(R.font.inter_24_semibold, FontWeight.SemiBold),
     Font(R.font.inter_thin, FontWeight.Thin),
 )
 

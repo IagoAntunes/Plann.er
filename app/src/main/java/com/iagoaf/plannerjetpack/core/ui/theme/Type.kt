@@ -7,8 +7,6 @@ import com.iagoaf.plannerjetpack.core.ui.theme.interFontFamily
 
 class AppTypography {
     companion object {
-
-
         val headingLg = TextStyle(
             fontSize = 32.sp,
             fontWeight = FontWeight.SemiBold,
@@ -37,6 +35,8 @@ class AppTypography {
             fontFamily = interFontFamily,
         )
         val Typography = Typography(
+            headlineSmall = headingSm,
+            headlineLarge = headingLg,
             bodyLarge = bodyMd,
             bodyMedium = bodySm,
             labelLarge = button,

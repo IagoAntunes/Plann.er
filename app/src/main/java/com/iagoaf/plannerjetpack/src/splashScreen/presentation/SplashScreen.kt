@@ -23,7 +23,7 @@ import kotlinx.coroutines.delay
 fun SplashScreen(navController: NavController) {
 
     LaunchedEffect(Unit) {
-        delay(3000)
+        delay(300)
         navController.navigate("register_user_screen")
 
     }
