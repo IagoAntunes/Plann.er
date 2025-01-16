@@ -43,6 +43,9 @@ android {
 dependencies {
     val nav_version = "2.8.4"
     val room_version = "2.6.1"
+
+    implementation(libs.androidx.material.icons.extended)
+
     implementation(libs.androidx.navigation.compose)
     //Camera
     implementation(libs.androidx.camera.core)

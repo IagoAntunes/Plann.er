@@ -11,7 +11,7 @@ class UserRepositoryImpl(
         userDao.insert(user)
     }
 
-    override suspend fun getUser(id: Int): UserEntity {
-        return userDao.getUserById(id)
+    override suspend fun getUser(): List<UserEntity> {
+        return userDao.getUserById()
     }
 }

@@ -24,8 +24,7 @@ fun SplashScreen(navController: NavController) {
 
     LaunchedEffect(Unit) {
         delay(300)
-        navController.navigate("register_user_screen")
-
+        navController.navigate("home_screen")
     }
 
     Column(

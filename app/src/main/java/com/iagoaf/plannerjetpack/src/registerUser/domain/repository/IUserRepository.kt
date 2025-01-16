@@ -6,6 +6,6 @@ interface IUserRepository {
 
     suspend fun insertUser(user: UserEntity): Unit
 
-    suspend fun getUser(id: Int): UserEntity
+    suspend fun getUser(): List<UserEntity>
 
 }
