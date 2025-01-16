@@ -1,4 +1,4 @@
-package com.iagoaf.plannerjetpack.src.home.presentation
+package com.iagoaf.plannerjetpack.src.home.presentation.states
 
 import com.iagoaf.plannerjetpack.src.registerUser.domain.models.UserModel
 

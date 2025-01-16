@@ -1,4 +1,4 @@
-package com.iagoaf.plannerjetpack.src.home.presentation
+package com.iagoaf.plannerjetpack.src.home.presentation.viewmodel
 
 import androidx.lifecycle.ViewModel
 import com.iagoaf.plannerjetpack.src.registerUser.domain.repository.IUserRepository

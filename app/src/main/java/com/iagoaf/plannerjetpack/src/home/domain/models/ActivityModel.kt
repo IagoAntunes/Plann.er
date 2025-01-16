@@ -4,5 +4,6 @@ data class ActivityModel(
     val id: Int,
     val name: String,
     val date: String,
-    val time: String
+    val time: String,
+    var isDone: Boolean,
 )

@@ -1,4 +1,4 @@
-package com.iagoaf.plannerjetpack.src.home.presentation
+package com.iagoaf.plannerjetpack.src.home.presentation.states
 
 sealed class HeadFormSaveActivityState {
     object Idle : HeadFormSaveActivityState()

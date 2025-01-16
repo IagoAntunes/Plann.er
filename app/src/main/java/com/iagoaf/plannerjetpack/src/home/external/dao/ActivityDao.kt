@@ -12,6 +12,6 @@ interface ActivityDao {
     suspend fun saveActivity(activity: ActivityEntity)
 
     @Query("SELECT * FROM activity")
-    fun getAllActivities(): Flow<ActivityEntity>
+    fun getAllActivities(): Flow<List<ActivityEntity>>
 
 }

@@ -2,6 +2,7 @@ package com.iagoaf.plannerjetpack.src.home.presentation
 
 
 import AppTypography
+import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -9,7 +10,6 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -46,6 +46,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.iagoaf.plannerjetpack.core.services.database.AppDatabase
 import com.iagoaf.plannerjetpack.core.ui.theme.lime300
 import com.iagoaf.plannerjetpack.core.ui.theme.zinc100
@@ -55,7 +56,10 @@ import com.iagoaf.plannerjetpack.core.ui.theme.zinc800
 import com.iagoaf.plannerjetpack.core.ui.theme.zinc950
 import com.iagoaf.plannerjetpack.core.utils.convertMillisToDate
 import com.iagoaf.plannerjetpack.src.home.infra.repository.ActivityRepositoryImpl
+import com.iagoaf.plannerjetpack.src.home.presentation.states.HeadFormSaveActivityListener
+import com.iagoaf.plannerjetpack.src.home.presentation.states.HeadFormSaveActivityState
 import com.iagoaf.plannerjetpack.src.home.presentation.viewmodel.HeadFormSaveActivityViewModel
+import com.iagoaf.plannerjetpack.src.home.presentation.viewmodel.HeadFormSaveActivityViewModelFactory
 import java.util.Calendar
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -63,15 +67,16 @@ import java.util.Calendar
 fun HeadFormSaveActivity() {
 
     val context = LocalContext.current
-    val viewModel = remember {
-        HeadFormSaveActivityViewModel(
+    val viewModel: HeadFormSaveActivityViewModel = viewModel(
+        factory = HeadFormSaveActivityViewModelFactory(
             activityRepository = ActivityRepositoryImpl(
                 activityDao = AppDatabase.getDatabase(context).activityDao()
             )
         )
-    }
+    )
 
     val state = viewModel.state.collectAsState()
+    val listener = viewModel.listener.collectAsState()
 
 
     val currentDate = Calendar.getInstance()
@@ -87,19 +92,32 @@ fun HeadFormSaveActivity() {
     val showTimePicker = remember { mutableStateOf(false) }
     val dateState = remember { mutableStateOf("") }
     val timeState = remember { mutableStateOf("") }
-
+    val activityValue = remember {
+        mutableStateOf("")
+    }
     val btnSaveActivityEnabled = remember {
         mutableStateOf(false)
     }
-    Column(
-        Modifier
-            .fillMaxSize()
-            .background(zinc950)
-            .padding(horizontal = 20.dp, vertical = 20.dp)
-    ) {
-        val activityValue = remember {
-            mutableStateOf("")
+
+    when (listener.value) {
+        is HeadFormSaveActivityListener.savedActivity -> {
+            activityValue.value = ""
+            dateState.value = ""
+            timeState.value = ""
+            btnSaveActivityEnabled.value = false
+            Toast.makeText(context, "Atividade salva com sucesso", Toast.LENGTH_SHORT).show()
         }
+
+        is HeadFormSaveActivityListener.errorSavedActivity -> {
+            Toast.makeText(context, "Erro ao salvar a atividade", Toast.LENGTH_SHORT).show()
+        }
+
+        is HeadFormSaveActivityListener.idle -> {
+        }
+    }
+
+    Column {
+
         OutlinedTextField(
             value = activityValue.value,
             modifier = Modifier
@@ -121,7 +139,7 @@ fun HeadFormSaveActivity() {
             colors = OutlinedTextFieldDefaults.colors(
                 unfocusedBorderColor = zinc800,
                 focusedBorderColor = lime300,
-                unfocusedTextColor = zinc400,
+                unfocusedTextColor = zinc100,
                 focusedTextColor = zinc400,
             ),
             prefix = {

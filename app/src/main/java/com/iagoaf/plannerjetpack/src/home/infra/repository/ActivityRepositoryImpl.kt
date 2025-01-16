@@ -12,7 +12,7 @@ class ActivityRepositoryImpl(
         return activityDao.saveActivity(activity)
     }
 
-    override fun getAll(): Flow<ActivityEntity> {
+    override fun getAll(): Flow<List<ActivityEntity>> {
         return activityDao.getAllActivities()
     }
 }

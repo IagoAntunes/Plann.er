@@ -6,6 +6,6 @@ import kotlinx.coroutines.flow.Flow
 interface IActivityRepository {
 
     suspend fun saveActivity(activity: ActivityEntity)
-    fun getAll(): Flow<ActivityEntity>
+    fun getAll(): Flow<List<ActivityEntity>>
 
 }
